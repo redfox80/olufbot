@@ -1,4 +1,4 @@
-#!/usr/bin/env node
+#!/usr/local/bin node
 const botsettings = require('./botsettings.json');
 const Discord = require('discord.js');
 
