@@ -1,19 +1,24 @@
 #!/usr/bin/env node
+
+require('babel-polyfill');
+
 const botsettings = require('./botsettings.json');
 const Discord = require('discord.js');
 
 const bot = new Discord.Client(botsettings.clientSettings);
+
+import * as identifier from './commands/identifier.js';
 
 bot.on("ready", async () => {
     console.log(`Bot is ready! ${bot.user.username}`);
 
     bot.user.setPresence({
         game: {
-            name: 'with children | +help'
+            name: 'with children | '+botsettings.prefix+'help'
         }
     });
 
-    bot.generateInvite(215104)
+    bot.generateInvite(8)
         .then(link => console.log(`Generated bot invite link: ${link}`))
         .catch(err => {
             console.log(err.stack);
@@ -27,11 +32,9 @@ bot.on("message", async message => {
     if(message.author.bot) return;
     if(message.channel.type === "dm") return;
 
-    let messageArray = message.content.split();
-    let command = messageArray[0];
-    let args = messageArray.slice(1);
+    identifier.command(message);
 
-    if(!command.startsWith(botsettings.prefix)) return;
+    return 0;
 
     switch(command.substr(1, command.length))
     {
