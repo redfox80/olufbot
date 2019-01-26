@@ -27,12 +27,14 @@ regeneratorRuntime.mark(function _callee() {
     while (1) {
       switch (_context.prev = _context.next) {
         case 0:
-          console.log("".concat(bot.user.username, " bot is ready!"));
+          console.log("".concat(bot.user.username, " bot is ready!")); //set game for bot
+
           bot.user.setPresence({
             game: {
               name: "with children | ".concat(_botsettings.default.prefix, "help")
             }
-          });
+          }); //Generate invite and log to console
+
           bot.generateInvite(8).then(function (link) {
             return console.log("Generated bot invite link: ".concat(link));
           }).catch(function (err) {
@@ -45,7 +47,8 @@ regeneratorRuntime.mark(function _callee() {
       }
     }
   }, _callee, this);
-})));
+}))); //Message listener
+
 bot.on("message",
 /*#__PURE__*/
 function () {
@@ -86,5 +89,6 @@ function () {
   return function (_x) {
     return _ref2.apply(this, arguments);
   };
-}());
+}()); //Authenticate bot to discord api
+
 bot.login(_botsettings.default.token);

@@ -11,12 +11,14 @@ const bot = new Discord.Client(botsettings.clientSettings);
 bot.on("ready", async () => {
     console.log(`${bot.user.username} bot is ready!`);
 
+    //set game for bot
     bot.user.setPresence({
         game: {
             name: `with children | ${botsettings.prefix}help`
         }
     });
 
+    //Generate invite and log to console
     bot.generateInvite(8)
         .then(link => console.log(`Generated bot invite link: ${link}`))
         .catch(err => {
@@ -25,6 +27,7 @@ bot.on("ready", async () => {
 
 });
 
+//Message listener
 bot.on("message", async message => {
     if(message.author.bot) return;
     if(message.channel.type === "dm") return;
@@ -36,4 +39,5 @@ bot.on("message", async message => {
     
 });
 
+//Authenticate bot to discord api
 bot.login(botsettings.token);
