@@ -16,6 +16,7 @@ function _default(message) {
 
   //Load cache file if it exists
   if (_fs.default.existsSync("../../cache/amisexy_cache.json")) {
+    console.log("It's there allright");
     cache = JSON.parse(_fs.default.readFileSync("../../cache/amisexy_cache.json", "utf8"));
   } //Check for arguments and run appropiate function if present
 
