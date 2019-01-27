@@ -1,15 +1,15 @@
 import fs from "fs";
 
+let cache = [];
+
 export default function(message, args=null) {
-
-    let cache = null;
     
-    fs.exists(`amisexy_cache.json`, exists => {
-        if(exists) {
-            cache = fs.readFile(`amisexy_cache.json`);
-        }
-    });
+    //Load cache file if it exists
+    if(fs.existsSync(`cache/amisexy_cache.json`)) {
+        cache = JSON.parse(fs.readFileSync(`cache/amisexy_cache.json`, `utf8`));
+    }
 
+    //Check for arguments and run appropiate function if present
     if(args) {
         if(args[0] === "cache") {
 
@@ -28,42 +28,48 @@ export default function(message, args=null) {
         }
     }
 
-    let newUser = true;
+    //Declaring for later use
     let user = false;
 
-    for(let i = 0; i < cache.length; i++) {
-        if(cache[i].id = message.author.id) {
-            newUser = false;
+    //Check if user is allready in cache
+    for(let i in cache) {
+        if(cache[i].id == message.author.id) {
             user = cache[i];
             break;
         }
     }
 
-    if(newUser) {
+    //If not in cache, create new cache object
+    if(!user) {
         let rand = Math.random();
         user = {
             id: message.author.id,
+            username: message.author.username,
+            displayname: message.member.displayName,
             sexy: (rand > 0.7) ? true:false,
         }
         cache.push(user);
+
+        //Write changes to cache
+        fs.writeFile(`cache/amisexy_cache.json`, JSON.stringify(cache, null, 4), error => {
+            if(error) console.log(error.stack);
+        });
     }
 
-    async () => {
-        fs.writeFile(`amisexy_cache.json`, cache);
-        return 0;
-    }
+    //Determine appropiate response
+    let response = user.sexy ? `${message.member.displayName} IS HELLA SEXY!`:'HELL NO!';
 
-    let response = user.sexy ? 'HELL YEAH BITCH!':'HELL NO!';
-
+    //Respond
     message.channel.send(response);
 
 }
 
+//Prints out cache
 function printCache (message) {
     let response = "";
 
-    for(let i = 0; i < cache.length; i++) {
-        response = `${response}${cache[i].id}: ${cache[i].sexy}\n`;
+    for(let i in cache) {
+        response = `${response}${cache[i].id} - ${cache[i].displayname}: ${cache[i].sexy}\n`;
     }
 
     response = `${response}\n`;
@@ -75,6 +81,7 @@ function printCache (message) {
     }
 }
 
+//Clears cache if authorized user
 function clearCache(message) {
 
     if(message.author.id != "203851266453929984") {
@@ -83,5 +90,9 @@ function clearCache(message) {
     }
 
     cache = [];
+    fs.writeFileSync(`cache/amisexy_cache.json`, JSON.stringify(cache, null, 4), error => {
+        if(error) console.log(error.stack);
+    });
+
     message.channel.send('Cache cleared!');
 }

@@ -9,19 +9,16 @@ var _fs = _interopRequireDefault(require("fs"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
-
-function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+var cache = [];
 
 function _default(message) {
   var args = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;
-  var cache = null;
 
-  _fs.default.exists("amisexy_cache.json", function (exists) {
-    if (exists) {
-      cache = _fs.default.readFile("amisexy_cache.json");
-    }
-  });
+  //Load cache file if it exists
+  if (_fs.default.existsSync("cache/amisexy_cache.json")) {
+    cache = JSON.parse(_fs.default.readFileSync("cache/amisexy_cache.json", "utf8"));
+  } //Check for arguments and run appropiate function if present
+
 
   if (args) {
     if (args[0] === "cache") {
@@ -33,57 +30,46 @@ function _default(message) {
         return 0;
       }
     }
-  }
+  } //Declaring for later use
 
-  var newUser = true;
-  var user = false;
 
-  for (var i = 0; i < cache.length; i++) {
-    if (cache[i].id = message.author.id) {
-      newUser = false;
+  var user = false; //Check if user is allready in cache
+
+  for (var i in cache) {
+    if (cache[i].id == message.author.id) {
       user = cache[i];
       break;
     }
-  }
+  } //If not in cache, create new cache object
 
-  if (newUser) {
+
+  if (!user) {
     var rand = Math.random();
     user = {
       id: message.author.id,
+      username: message.author.username,
+      displayname: message.member.displayName,
       sexy: rand > 0.7 ? true : false
     };
-    cache.push(user);
-  }
+    cache.push(user); //Write changes to cache
 
-  /*#__PURE__*/
-  _asyncToGenerator(
-  /*#__PURE__*/
-  regeneratorRuntime.mark(function _callee() {
-    return regeneratorRuntime.wrap(function _callee$(_context) {
-      while (1) {
-        switch (_context.prev = _context.next) {
-          case 0:
-            _fs.default.writeFile("amisexy_cache.json", cache);
+    _fs.default.writeFile("cache/amisexy_cache.json", JSON.stringify(cache, null, 4), function (error) {
+      if (error) console.log(error.stack);
+    });
+  } //Determine appropiate response
 
-            return _context.abrupt("return", 0);
 
-          case 2:
-          case "end":
-            return _context.stop();
-        }
-      }
-    }, _callee, this);
-  }));
+  var response = user.sexy ? "".concat(message.member.displayName, " IS HELLA SEXY!") : 'HELL NO!'; //Respond
 
-  var response = user.sexy ? 'HELL YEAH BITCH!' : 'HELL NO!';
   message.channel.send(response);
-}
+} //Prints out cache
+
 
 function printCache(message) {
   var response = "";
 
-  for (var i = 0; i < cache.length; i++) {
-    response = "".concat(response).concat(cache[i].id, ": ").concat(cache[i].sexy, "\n");
+  for (var i in cache) {
+    response = "".concat(response).concat(cache[i].id, " - ").concat(cache[i].displayname, ": ").concat(cache[i].sexy, "\n");
   }
 
   response = "".concat(response, "\n");
@@ -93,7 +79,8 @@ function printCache(message) {
   } else {
     message.channel.send('Cache is empty');
   }
-}
+} //Clears cache if authorized user
+
 
 function clearCache(message) {
   if (message.author.id != "203851266453929984") {
@@ -102,5 +89,10 @@ function clearCache(message) {
   }
 
   cache = [];
+
+  _fs.default.writeFileSync("cache/amisexy_cache.json", JSON.stringify(cache, null, 4), function (error) {
+    if (error) console.log(error.stack);
+  });
+
   message.channel.send('Cache cleared!');
 }
