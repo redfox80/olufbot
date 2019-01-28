@@ -13,11 +13,11 @@ var cache = [];
 
 function _default(message) {
   var args = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;
+  var cacheFilePath = "".concat(__dirname, "/../../cache/amisexy_cache.json");
+  console.log(__dirname); //Load cache file if it exists
 
-  //Load cache file if it exists
-  if (_fs.default.existsSync("../../cache/amisexy_cache.json")) {
-    console.log("It's there allright");
-    cache = JSON.parse(_fs.default.readFileSync("../../cache/amisexy_cache.json", "utf8"));
+  if (_fs.default.existsSync(cacheFilePath)) {
+    cache = JSON.parse(_fs.default.readFileSync(cacheFilePath, "utf8"));
   } //Check for arguments and run appropiate function if present
 
 
@@ -54,7 +54,7 @@ function _default(message) {
     };
     cache.push(user); //Write changes to cache
 
-    _fs.default.writeFile("../../cache/amisexy_cache.json", JSON.stringify(cache, null, 4), function (error) {
+    _fs.default.writeFile(cacheFilePath, JSON.stringify(cache, null, 4), function (error) {
       if (error) console.log(error.stack);
     });
   } //Determine appropiate response
@@ -91,7 +91,7 @@ function clearCache(message) {
 
   cache = [];
 
-  _fs.default.writeFileSync("../../cache/amisexy_cache.json", JSON.stringify(cache, null, 4), function (error) {
+  _fs.default.writeFileSync(cacheFilePath, JSON.stringify(cache, null, 4), function (error) {
     if (error) console.log(error.stack);
   });
 
