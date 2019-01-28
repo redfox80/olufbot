@@ -18,6 +18,8 @@ function _default(message) {
 
   if (_fs.default.existsSync(cacheFilePath)) {
     cache = JSON.parse(_fs.default.readFileSync(cacheFilePath, "utf8"));
+  } else {
+    _fs.default.writeFileSync(cacheFilePath, JSON.stringify("[]"));
   } //Check for arguments and run appropiate function if present
 
 
