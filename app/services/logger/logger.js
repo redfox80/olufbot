@@ -31,7 +31,7 @@ var cacheStoreInterval = setInterval(function () {
 
     _fs.default.writeFileSync(cacheFilePath, JSON.stringify(cacheFile, null, 4));
   }
-}, 5000);
+}, 60000);
 
 var _default = function _default(message) {
   var log = false;

@@ -24,7 +24,7 @@ const cacheStoreInterval = setInterval(() => {
 
         fs.writeFileSync(cacheFilePath, JSON.stringify(cacheFile, null, 4));
     }
-}, 5000)
+}, 60000)
 
 export default (message) => {
 
