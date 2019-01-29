@@ -13,8 +13,7 @@ var cache = [];
 
 function _default(message) {
   var args = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;
-  var cacheFilePath = "".concat(__dirname, "/../../cache/amisexy_cache.json");
-  console.log(__dirname); //Load cache file if it exists
+  var cacheFilePath = "".concat(__dirname, "/../../cache/amisexy_cache.json"); //Load cache file if it exists
 
   if (_fs.default.existsSync(cacheFilePath)) {
     cache = JSON.parse(_fs.default.readFileSync(cacheFilePath, "utf8"));

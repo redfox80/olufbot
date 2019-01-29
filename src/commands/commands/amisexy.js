@@ -3,10 +3,14 @@ import fs from "fs";
 let cache = [];
 
 export default function(message, args=null) {
+
+    const cacheFilePath = `${__dirname}/../../cache/amisexy_cache.json`;
     
     //Load cache file if it exists
-    if(fs.existsSync(`cache/amisexy_cache.json`)) {
-        cache = JSON.parse(fs.readFileSync(`cache/amisexy_cache.json`, `utf8`));
+    if(fs.existsSync(cacheFilePath)) {
+        cache = JSON.parse(fs.readFileSync(cacheFilePath, `utf8`));
+    } else {
+        fs.writeFileSync(cacheFilePath, JSON.stringify("[]"));
     }
 
     //Check for arguments and run appropiate function if present
@@ -51,7 +55,7 @@ export default function(message, args=null) {
         cache.push(user);
 
         //Write changes to cache
-        fs.writeFile(`cache/amisexy_cache.json`, JSON.stringify(cache, null, 4), error => {
+        fs.writeFile(cacheFilePath, JSON.stringify(cache, null, 4), error => {
             if(error) console.log(error.stack);
         });
     }
@@ -90,7 +94,7 @@ function clearCache(message) {
     }
 
     cache = [];
-    fs.writeFileSync(`cache/amisexy_cache.json`, JSON.stringify(cache, null, 4), error => {
+    fs.writeFileSync(cacheFilePath, JSON.stringify(cache, null, 4), error => {
         if(error) console.log(error.stack);
     });
 

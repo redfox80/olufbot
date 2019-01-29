@@ -7,6 +7,8 @@ var _discord = _interopRequireDefault(require("discord.js"));
 
 var identifier = _interopRequireWildcard(require("./commands/identifier.js"));
 
+var _logger = _interopRequireDefault(require("./services/logger/logger.js"));
+
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = Object.defineProperty && Object.getOwnPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : {}; if (desc.get || desc.set) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } } newObj.default = obj; return newObj; } }
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
@@ -55,6 +57,7 @@ function () {
   var _ref2 = _asyncToGenerator(
   /*#__PURE__*/
   regeneratorRuntime.mark(function _callee2(message) {
+    var messageArray, command, args;
     return regeneratorRuntime.wrap(function _callee2$(_context2) {
       while (1) {
         switch (_context2.prev = _context2.next) {
@@ -75,10 +78,19 @@ function () {
             return _context2.abrupt("return");
 
           case 4:
-            identifier.command(message);
+            //Split up actual command and arguments
+            messageArray = message.content.split(' ');
+            command = messageArray[0];
+            args = messageArray.slice(1); //verify bot prefix
+
+            if (command.startsWith(_botsettings.default.prefix)) {
+              identifier.command(message, command);
+            }
+
+            (0, _logger.default)(message);
             return _context2.abrupt("return", 0);
 
-          case 6:
+          case 10:
           case "end":
             return _context2.stop();
         }

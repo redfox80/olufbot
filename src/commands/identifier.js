@@ -2,16 +2,9 @@ import botsettings from '../botsettings.json';
 
 import help from './commands/help.js';
 import amisexy from './commands/amisexy.js';
+import sql from './commands/sql.js';
 
-export function command(message) {
-
-    //Split up actual command and arguments
-    let messageArray = message.content.split(' ');
-    let command = messageArray[0];
-    let args = messageArray.slice(1);
-
-    //verify bot prefix
-    if(!command.startsWith(botsettings.prefix)) return;
+export function command(message, command) {
 
     //Get appropiate command
     let res = commands();
@@ -27,6 +20,8 @@ export function command(message) {
             help: () => help(message),
     
             amisexy: () => amisexy(message, args),
+
+            sql: () => sql(message, args),
     
             default: () => message.channel.send("Dafuq you talkin about!?"),
         };

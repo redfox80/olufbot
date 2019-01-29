@@ -2,5 +2,13 @@
     "token": "",
     "prefix": "+",
     "clientSettings": {
-    }
+    },
+    "sql": {
+        "host": "",
+        "database": "",
+        "user": "",
+        "password": ""
+    },
+    "logGuilds": [
+    ]
 }

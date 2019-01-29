@@ -5,6 +5,7 @@ require('babel-polyfill');
 import botsettings from './botsettings.json';
 import Discord from 'discord.js';
 import * as identifier from './commands/identifier.js';
+import logger from './services/logger/logger.js';
 
 const bot = new Discord.Client(botsettings.clientSettings);
 
@@ -32,7 +33,19 @@ bot.on("message", async message => {
     if(message.author.bot) return;
     if(message.channel.type === "dm") return;
 
-    identifier.command(message);
+    //Split up actual command and arguments
+    let messageArray = message.content.split(' ');
+    let command = messageArray[0];
+    let args = messageArray.slice(1);
+
+    //verify bot prefix
+    if(command.startsWith(botsettings.prefix)) {
+        
+        identifier.command(message, command);
+
+    }
+
+    logger(message);
 
     return 0;
 

@@ -11,16 +11,12 @@ var _help2 = _interopRequireDefault(require("./commands/help.js"));
 
 var _amisexy2 = _interopRequireDefault(require("./commands/amisexy.js"));
 
+var _sql2 = _interopRequireDefault(require("./commands/sql.js"));
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-function command(message) {
-  //Split up actual command and arguments
-  var messageArray = message.content.split(' ');
-  var command = messageArray[0];
-  var args = messageArray.slice(1); //verify bot prefix
-
-  if (!command.startsWith(_botsettings.default.prefix)) return; //Get appropiate command
-
+function command(message, command) {
+  //Get appropiate command
   var res = commands(); //Run command
 
   res();
@@ -36,6 +32,9 @@ function command(message) {
       },
       amisexy: function amisexy() {
         return (0, _amisexy2.default)(message, args);
+      },
+      sql: function sql() {
+        return (0, _sql2.default)(message, args);
       },
       default: function _default() {
         return message.channel.send("Dafuq you talkin about!?");
