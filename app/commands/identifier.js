@@ -13,9 +13,11 @@ var _amisexy2 = _interopRequireDefault(require("./commands/amisexy.js"));
 
 var _sql2 = _interopRequireDefault(require("./commands/sql.js"));
 
+var _log2 = _interopRequireDefault(require("./commands/log.js"));
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-function command(message, command) {
+function command(message, command, args) {
   //Get appropiate command
   var res = commands(); //Run command
 
@@ -35,6 +37,9 @@ function command(message, command) {
       },
       sql: function sql() {
         return (0, _sql2.default)(message, args);
+      },
+      log: function log() {
+        return (0, _log2.default)(message, args);
       },
       default: function _default() {
         return message.channel.send("Dafuq you talkin about!?");

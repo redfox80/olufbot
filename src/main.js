@@ -41,7 +41,7 @@ bot.on("message", async message => {
     //verify bot prefix
     if(command.startsWith(botsettings.prefix)) {
         
-        identifier.command(message, command);
+        identifier.command(message, command, args);
 
     }
 

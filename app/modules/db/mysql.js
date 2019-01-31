@@ -7,7 +7,7 @@ exports.test = test;
 
 var _sequelize = _interopRequireDefault(require("sequelize"));
 
-var _botsettings = _interopRequireDefault(require("../botsettings.json"));
+var _botsettings = _interopRequireDefault(require("../../botsettings.json"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 

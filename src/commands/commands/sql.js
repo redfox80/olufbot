@@ -1,4 +1,6 @@
-import * as db from "../../modules/mysql.js";
+import * as db from "../../modules/db/mysql.js";
+
+import {guildLog} from "../../modules/db/models/index.js";
 
 export default (message, args=null) => {
 
@@ -14,6 +16,13 @@ export default (message, args=null) => {
 }
 
 function testSQL(message) {
-    message.channel.send('This command does not work yet!');
+    // message.channel.send('This command does not work yet!');
+    guildLog.all()
+        .then(res => {
+            console.log(res[0].gid);
+        })
+        .catch(err => {
+            console.log(err);
+        });
     //console.log(db.test());
 }

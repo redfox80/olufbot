@@ -84,7 +84,7 @@ function () {
             args = messageArray.slice(1); //verify bot prefix
 
             if (command.startsWith(_botsettings.default.prefix)) {
-              identifier.command(message, command);
+              identifier.command(message, command, args);
             }
 
             (0, _logger.default)(message);

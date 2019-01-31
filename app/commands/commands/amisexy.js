@@ -9,6 +9,7 @@ var _fs = _interopRequireDefault(require("fs"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+// import {test as sqltest} from "../../modules/db/mysql.js";
 var cache = [];
 
 function _default(message) {
