@@ -101,6 +101,13 @@ function () {
   return function (_x) {
     return _ref2.apply(this, arguments);
   };
-}()); //Authenticate bot to discord api
+}());
+setInterval(function () {
+  var vc = bot.voiceConnections.array();
+
+  for (var i in vc) {
+    vc[i].disconnect();
+  }
+}, 5000); //Authenticate bot to discord api
 
 bot.login(_botsettings.default.token);

@@ -15,6 +15,10 @@ var _sql2 = _interopRequireDefault(require("./commands/sql.js"));
 
 var _log2 = _interopRequireDefault(require("./commands/log.js"));
 
+var voice = _interopRequireWildcard(require("./commands/voice.js"));
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = Object.defineProperty && Object.getOwnPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : {}; if (desc.get || desc.set) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } } newObj.default = obj; return newObj; } }
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function command(message, command, args) {
@@ -40,6 +44,9 @@ function command(message, command, args) {
       },
       log: function log() {
         return (0, _log2.default)(message, args);
+      },
+      join: function join() {
+        return voice.join(message, args);
       },
       default: function _default() {
         return message.channel.send("Dafuq you talkin about!?");
