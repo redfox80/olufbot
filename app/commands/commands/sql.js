@@ -13,6 +13,7 @@ function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj;
 
 var _default = function _default(message) {
   var args = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;
+  return 0;
 
   if (args) {
     if (args[0] === "test") {
