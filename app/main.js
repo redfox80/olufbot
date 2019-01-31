@@ -37,7 +37,7 @@ regeneratorRuntime.mark(function _callee() {
             }
           }); //Generate invite and log to console
 
-          bot.generateInvite(8).then(function (link) {
+          bot.generateInvite(3374144).then(function (link) {
             return console.log("Generated bot invite link: ".concat(link));
           }).catch(function (err) {
             console.log(err.stack);
