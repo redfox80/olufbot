@@ -4,6 +4,7 @@ import help from './commands/help.js';
 import amisexy from './commands/amisexy.js';
 import sql from './commands/sql.js';
 import log from './commands/log.js';
+import * as voice from './commands/voice.js';
 
 export function command(message, command, args) {
 
@@ -25,6 +26,14 @@ export function command(message, command, args) {
             sql: () => sql(message, args),
 
             log: () => log(message, args),
+
+            join: () => voice.join(message, args),
+
+            leave: () => voice.leave(message, args),
+
+            play: () => voice.play(message, args),
+
+            stop: () => voice.stop(message, args),
     
             default: () => message.channel.send("Dafuq you talkin about!?"),
         };

@@ -1,6 +1,11 @@
 #!/usr/bin/env node
 "use strict";
 
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.bot = void 0;
+
 var _botsettings = _interopRequireDefault(require("./botsettings.json"));
 
 var _discord = _interopRequireDefault(require("discord.js"));
@@ -20,6 +25,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 require('babel-polyfill');
 
 var bot = new _discord.default.Client(_botsettings.default.clientSettings);
+exports.bot = bot;
 bot.on("ready",
 /*#__PURE__*/
 _asyncToGenerator(
@@ -101,13 +107,6 @@ function () {
   return function (_x) {
     return _ref2.apply(this, arguments);
   };
-}());
-setInterval(function () {
-  var vc = bot.voiceConnections.array();
-
-  for (var i in vc) {
-    vc[i].disconnect();
-  }
-}, 5000); //Authenticate bot to discord api
+}()); //Authenticate bot to discord api
 
 bot.login(_botsettings.default.token);

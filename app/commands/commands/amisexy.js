@@ -4,6 +4,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.default = _default;
+exports.definition = void 0;
 
 var _fs = _interopRequireDefault(require("fs"));
 
@@ -11,6 +12,12 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 // import {test as sqltest} from "../../modules/db/mysql.js";
 var cache = [];
+var definition = {
+  command: "amisexy",
+  name: "Am I sexy",
+  description: "Determines wether you are sexy or not, will Oluf find you worthy?"
+};
+exports.definition = definition;
 
 function _default(message) {
   var args = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;

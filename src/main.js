@@ -7,7 +7,7 @@ import Discord from 'discord.js';
 import * as identifier from './commands/identifier.js';
 import logger from './services/logger/logger.js';
 
-const bot = new Discord.Client(botsettings.clientSettings);
+export let bot = new Discord.Client(botsettings.clientSettings);
 
 bot.on("ready", async () => {
     console.log(`${bot.user.username} bot is ready!`);
@@ -20,7 +20,7 @@ bot.on("ready", async () => {
     });
 
     //Generate invite and log to console
-    bot.generateInvite(8)
+    bot.generateInvite(3374144)
         .then(link => console.log(`Generated bot invite link: ${link}`))
         .catch(err => {
             console.log(err.stack);

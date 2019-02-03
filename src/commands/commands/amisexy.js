@@ -3,6 +3,12 @@ import fs from "fs";
 
 let cache = [];
 
+export const definition = {
+    command: "amisexy",
+    name: "Am I sexy",
+    description: "Determines wether you are sexy or not, will Oluf find you worthy?",
+}
+
 export default function(message, args=null) {
 
     const cacheFilePath = `${__dirname}/../../cache/amisexy_cache.json`;

@@ -48,6 +48,15 @@ function command(message, command, args) {
       join: function join() {
         return voice.join(message, args);
       },
+      leave: function leave() {
+        return voice.leave(message, args);
+      },
+      play: function play() {
+        return voice.play(message, args);
+      },
+      stop: function stop() {
+        return voice.stop(message, args);
+      },
       default: function _default() {
         return message.channel.send("Dafuq you talkin about!?");
       }
