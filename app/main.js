@@ -14,15 +14,14 @@ var identifier = _interopRequireWildcard(require("./commands/identifier.js"));
 
 var _logger = _interopRequireDefault(require("./services/logger/logger.js"));
 
-var _handler = _interopRequireDefault(require("./modules/api/handler"));
-
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = Object.defineProperty && Object.getOwnPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : {}; if (desc.get || desc.set) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } } newObj.default = obj; return newObj; } }
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 require('babel-polyfill');
 
-(0, _handler.default)();
+// import apiHandler from './modules/api/handler';
+// apiHandler();
 const bot = new _discord.default.Client(_botsettings.default.clientSettings);
 exports.bot = bot;
 bot.on("ready", async () => {

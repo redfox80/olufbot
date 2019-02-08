@@ -6,9 +6,9 @@ import botsettings from './botsettings.json';
 import Discord from 'discord.js';
 import * as identifier from './commands/identifier.js';
 import logger from './services/logger/logger.js';
-import apiHandler from './modules/api/handler';
+// import apiHandler from './modules/api/handler';
 
-apiHandler();
+// apiHandler();
 
 export const bot = new Discord.Client(botsettings.clientSettings);
 
