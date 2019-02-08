@@ -11,20 +11,19 @@ var _fs = _interopRequireDefault(require("fs"));
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 // import {test as sqltest} from "../../modules/db/mysql.js";
-var cache = [];
-var definition = {
+let cache = [];
+const definition = {
   command: "amisexy",
   name: "Am I sexy",
   description: "Determines wether you are sexy or not, will Oluf find you worthy?"
 };
 exports.definition = definition;
 
-function _default(message) {
-  var args = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;
-  var cacheFilePath = "".concat(__dirname, "/../../cache/amisexy_cache.json"); //Load cache file if it exists
+function _default(message, args = null) {
+  const cacheFilePath = `${__dirname}/../../cache/amisexy_cache.json`; //Load cache file if it exists
 
   if (_fs.default.existsSync(cacheFilePath)) {
-    cache = JSON.parse(_fs.default.readFileSync(cacheFilePath, "utf8"));
+    cache = JSON.parse(_fs.default.readFileSync(cacheFilePath, `utf8`));
   } else {
     _fs.default.writeFileSync(cacheFilePath, JSON.stringify("[]"));
   } //Check for arguments and run appropiate function if present
@@ -43,9 +42,9 @@ function _default(message) {
   } //Declaring for later use
 
 
-  var user = false; //Check if user is allready in cache
+  let user = false; //Check if user is allready in cache
 
-  for (var i in cache) {
+  for (let i in cache) {
     if (cache[i].id == message.author.id) {
       user = cache[i];
       break;
@@ -54,7 +53,7 @@ function _default(message) {
 
 
   if (!user) {
-    var rand = Math.random();
+    let rand = Math.random();
     user = {
       id: message.author.id,
       username: message.author.username,
@@ -63,26 +62,26 @@ function _default(message) {
     };
     cache.push(user); //Write changes to cache
 
-    _fs.default.writeFile(cacheFilePath, JSON.stringify(cache, null, 4), function (error) {
+    _fs.default.writeFile(cacheFilePath, JSON.stringify(cache, null, 4), error => {
       if (error) console.log(error.stack);
     });
   } //Determine appropiate response
 
 
-  var response = user.sexy ? "".concat(message.member.displayName, " IS HELLA SEXY!") : 'HELL NO!'; //Respond
+  let response = user.sexy ? `${message.member.displayName} IS HELLA SEXY!` : 'HELL NO!'; //Respond
 
   message.channel.send(response);
 } //Prints out cache
 
 
 function printCache(message) {
-  var response = "";
+  let response = "";
 
-  for (var i in cache) {
-    response = "".concat(response).concat(cache[i].id, " - ").concat(cache[i].displayname, ": ").concat(cache[i].sexy, "\n");
+  for (let i in cache) {
+    response = `${response}${cache[i].id} - ${cache[i].displayname}: ${cache[i].sexy}\n`;
   }
 
-  response = "".concat(response, "\n");
+  response = `${response}\n`;
 
   if (response != "\n" && response != null) {
     message.channel.send(response);
@@ -100,7 +99,7 @@ function clearCache(message) {
 
   cache = [];
 
-  _fs.default.writeFileSync(cacheFilePath, JSON.stringify(cache, null, 4), function (error) {
+  _fs.default.writeFileSync(cacheFilePath, JSON.stringify(cache, null, 4), error => {
     if (error) console.log(error.stack);
   });
 

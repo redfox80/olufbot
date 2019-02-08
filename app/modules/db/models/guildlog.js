@@ -1,7 +1,7 @@
 'use strict';
 
-module.exports = function (sequelize, DataTypes) {
-  var guildLog = sequelize.define('guildLog', {
+module.exports = (sequelize, DataTypes) => {
+  const guildLog = sequelize.define('guildLog', {
     gid: DataTypes.STRING,
     text: DataTypes.BOOLEAN,
     images: DataTypes.BOOLEAN

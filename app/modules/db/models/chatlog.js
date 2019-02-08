@@ -1,7 +1,7 @@
 'use strict';
 
-module.exports = function (sequelize, DataTypes) {
-  var ChatLog = sequelize.define('ChatLog', {
+module.exports = (sequelize, DataTypes) => {
+  const ChatLog = sequelize.define('ChatLog', {
     message: DataTypes.STRING,
     author_id: DataTypes.STRING,
     author_username: DataTypes.STRING,

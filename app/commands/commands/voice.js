@@ -15,7 +15,7 @@ var _player = require("../../services/voice/player.js");
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = Object.defineProperty && Object.getOwnPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : {}; if (desc.get || desc.set) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } } newObj.default = obj; return newObj; } }
 
 function join(message, args) {
-  var cid = null;
+  let cid = null;
 
   if (args) {
     if (args[0]) {
@@ -27,7 +27,7 @@ function join(message, args) {
 }
 
 function leave(message, args) {
-  var cid = null;
+  let cid = null;
 
   if (args) {
     if (args[0]) {
@@ -39,7 +39,7 @@ function leave(message, args) {
 }
 
 function play(message, args) {
-  var gid = message.guild.id;
+  let gid = message.guild.id;
 
   if (args) {
     if (args[0]) {
@@ -52,7 +52,7 @@ function play(message, args) {
 }
 
 function stop(message, args) {
-  var gid = message.guild.id;
+  let gid = message.guild.id;
 
   if (args) {
     if (args[0]) {

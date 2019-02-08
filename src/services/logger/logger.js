@@ -40,7 +40,7 @@ export default (message) => {
     if(!log) return 0;
 
     let event = {
-        message: message.content,
+        message:            message.content,
         author_id:          message.author.id,
         author_username:    message.author.username,
         author_displayname: message.member.displayName,

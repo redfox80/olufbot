@@ -7,13 +7,13 @@ exports.command = command;
 
 var _botsettings = _interopRequireDefault(require("../botsettings.json"));
 
-var _help2 = _interopRequireDefault(require("./commands/help.js"));
+var _help = _interopRequireDefault(require("./commands/help.js"));
 
-var _amisexy2 = _interopRequireDefault(require("./commands/amisexy.js"));
+var _amisexy = _interopRequireDefault(require("./commands/amisexy.js"));
 
-var _sql2 = _interopRequireDefault(require("./commands/sql.js"));
+var _sql = _interopRequireDefault(require("./commands/sql.js"));
 
-var _log2 = _interopRequireDefault(require("./commands/log.js"));
+var _log = _interopRequireDefault(require("./commands/log.js"));
 
 var voice = _interopRequireWildcard(require("./commands/voice.js"));
 
@@ -23,45 +23,25 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 function command(message, command, args) {
   //Get appropiate command
-  var res = commands(); //Run command
+  let res = commands(); //Run command
 
   res();
 
   function commands() {
     //Object containing all commands
-    var list = {
-      fuckme: function fuckme() {
-        return message.channel.send("You got it boss!");
-      },
-      help: function help() {
-        return (0, _help2.default)(message);
-      },
-      amisexy: function amisexy() {
-        return (0, _amisexy2.default)(message, args);
-      },
-      sql: function sql() {
-        return (0, _sql2.default)(message, args);
-      },
-      log: function log() {
-        return (0, _log2.default)(message, args);
-      },
-      join: function join() {
-        return voice.join(message, args);
-      },
-      leave: function leave() {
-        return voice.leave(message, args);
-      },
-      play: function play() {
-        return voice.play(message, args);
-      },
-      stop: function stop() {
-        return voice.stop(message, args);
-      },
-      default: function _default() {
-        return message.channel.send("Dafuq you talkin about!?");
-      }
+    let list = {
+      fuckme: () => message.channel.send("You got it boss!"),
+      help: () => (0, _help.default)(message),
+      amisexy: () => (0, _amisexy.default)(message, args),
+      sql: () => (0, _sql.default)(message, args),
+      log: () => (0, _log.default)(message, args),
+      join: () => voice.join(message, args),
+      leave: () => voice.leave(message, args),
+      play: () => voice.play(message, args),
+      stop: () => voice.stop(message, args),
+      default: () => message.channel.send("Dafuq you talkin about!?")
     }; //Return command or unknown command response
 
-    return list[command.substr(1, command.length)] || list["default"];
+    return list[command.substr(1, command.length)] || list[`default`];
   }
 }

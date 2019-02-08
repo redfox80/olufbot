@@ -9,44 +9,25 @@ var _voice = require("./voice.js");
 
 var _main = require("../../main");
 
-function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+var _default = async () => {
+  //Join channels select with join command
+  setInterval(() => {
+    let shouldJoin = (0, _voice.ServersToJoin)();
+    let shouldLeave = (0, _voice.ServersToLeave)();
+    if (shouldJoin.length < 1 && shouldLeave.length < 1) return 0;
 
-function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
-
-var _default =
-/*#__PURE__*/
-_asyncToGenerator(
-/*#__PURE__*/
-regeneratorRuntime.mark(function _callee() {
-  return regeneratorRuntime.wrap(function _callee$(_context) {
-    while (1) {
-      switch (_context.prev = _context.next) {
-        case 0:
-          //Join channels select with join command
-          setInterval(function () {
-            var shouldJoin = (0, _voice.ServersToJoin)();
-            var shouldLeave = (0, _voice.ServersToLeave)();
-            if (shouldJoin.length < 1 && shouldLeave.length < 1) return 0;
-
-            for (var i in shouldJoin) {
-              _main.bot.channels.get(shouldJoin[i]).join().catch(function (err) {
-                console.error(err);
-              });
-            }
-
-            for (var _i in shouldLeave) {
-              _main.bot.channels.get(shouldLeave[_i].disconnect()).catch(function (err) {
-                console.error(err);
-              });
-            }
-          }, 1500);
-
-        case 1:
-        case "end":
-          return _context.stop();
-      }
+    for (let i in shouldJoin) {
+      _main.bot.channels.get(shouldJoin[i]).join().catch(err => {
+        console.error(err);
+      });
     }
-  }, _callee, this);
-}));
+
+    for (let i in shouldLeave) {
+      _main.bot.channels.get(shouldLeave[i].disconnect()).catch(err => {
+        console.error(err);
+      });
+    }
+  }, 1500);
+};
 
 exports.default = _default;
