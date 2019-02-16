@@ -13,8 +13,8 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 var _default = async () => {
   //Schedules are defined with the cron syntax
-  (0, _monthly_stats.default)(); //Monthly report 0 6 1 * * *
-
+  // monthly_stats();
+  //Monthly report 0 6 1 * * *
   let reportSchedule = _nodeSchedule.default.scheduleJob('0 6 1 * * *', () => {
     (0, _monthly_stats.default)();
   }); // let test = schedule.scheduleJob('30 11 * * 1-5 *', () => {

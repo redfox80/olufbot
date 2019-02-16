@@ -12,6 +12,7 @@
     "@babel/preset-env": "^7.3.1",
     "babel-polyfill": "^6.26.0",
     "body-parser": "^1.18.3",
+    "cors": "^2.8.5",
     "discord.js": "^11.4.2",
     "express": "^4.16.4",
     "ffmpeg-binaries": "^4.0.0",

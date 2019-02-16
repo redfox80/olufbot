@@ -5,7 +5,7 @@ export default async () => {
 
     //Schedules are defined with the cron syntax
 
-    monthly_stats();
+    // monthly_stats();
 
     //Monthly report 0 6 1 * * *
     let reportSchedule = schedule.scheduleJob('0 6 1 * * *', () => {

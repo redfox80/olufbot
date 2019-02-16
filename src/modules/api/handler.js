@@ -1,46 +1,33 @@
 import fs from "fs";
-// import https from "https";
+import http from "http";
+import https from "https";
 import express from "express";
 import bodyParser from "body-parser";
+import cors from "cors";
+import { routes } from "./routes";
 
 const apiServer = express();
 const port = 8080;
+const sPort = 8443;
 
+//Becayse, exports
 export default () => {
     return ":)";
 }
 
+//Apply middlewares
+apiServer.use('*', cors({origin: true}))
+apiServer.use('/api', bodyParser.urlencoded({ extended: true }));
 apiServer.use('/api', bodyParser.json());
 
-apiServer.post('/api', (req, res) => {
-
-    if(req.body.token) {
-
-        if(req.body.token === "Joakim er kul!") {
-            let a = req.body.a;
-            let b = req.body.b;
-
-            let result = a + b;
-
-            res.send(JSON.stringify(result));
-        } else {
-            res.sendStatus(403);
-        }
-
-    } else {
-        res.sendStatus(400);
-    }
-
-});
-
-apiServer.get('*', (req, res) => {
-    res.status(200).send('OK');
-});
+//Routes defined in routes.js
+routes(apiServer);
 
 const options = {
     key: fs.readFileSync('/webdev/STAR-fungy-no/server.key'),
-    cert: fs.readFileSync('/webdev/STAR-fungy-no/cerver.crt')
-}
+    cert: fs.readFileSync('/webdev/STAR-fungy-no/STAR-fungy-no.crt')
+};
 
-apiServer.listen(port, () => console.log(`API listening on port ${port}`));
-// https.createServer(app).listen(8443);
+// apiServer.listen(port, () => console.log(`API listening on port ${port}`));
+http.createServer(apiServer).listen(port);
+https.createServer(options, apiServer).listen(sPort);

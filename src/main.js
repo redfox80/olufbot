@@ -8,9 +8,9 @@ import * as identifier from './commands/identifier.js';
 import logger from './services/logger/logger.js';
 import report from './modules/report_generator/image';
 import reportScheduler from './modules/report_generator/scheduler';
-// import apiHandler from './modules/api/handler';
+import apiHandler from './modules/api/handler';
 
-// apiHandler();
+apiHandler();
 
 export const bot = new Discord.Client(botsettings.clientSettings);
 
