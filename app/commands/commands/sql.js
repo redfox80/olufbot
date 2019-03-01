@@ -11,8 +11,7 @@ var _index = require("../../modules/db/models/index.js");
 
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = Object.defineProperty && Object.getOwnPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : {}; if (desc.get || desc.set) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } } newObj.default = obj; return newObj; } }
 
-var _default = function _default(message) {
-  var args = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;
+var _default = (message, args = null) => {
   return 0;
 
   if (args) {
@@ -29,9 +28,9 @@ exports.default = _default;
 
 function testSQL(message) {
   // message.channel.send('This command does not work yet!');
-  _index.guildLog.all().then(function (res) {
+  _index.guildLog.all().then(res => {
     console.log(res[0].gid);
-  }).catch(function (err) {
+  }).catch(err => {
     console.log(err);
   }); //console.log(db.test());
 

@@ -1,0 +1,10 @@
+{
+    "hashSecret": "Very secret hash secret!",
+    "api": {
+        "enabled": true,
+        "port": 8080,
+        "sPort": 8443,
+        "cert": "/webdev/STAR-fungy-no/STAR-fungy-no.crt",
+        "key": "/webdev/STAR-fungy-no/server.key"
+    }
+}

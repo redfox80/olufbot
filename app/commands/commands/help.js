@@ -10,7 +10,7 @@ var _botsettings = _interopRequireDefault(require("../../botsettings.json"));
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _default(message) {
-  var commands = [{
+  let commands = [{
     name: "help",
     desc: "Shows this message"
   }, {
@@ -20,9 +20,9 @@ function _default(message) {
     name: "amisexy",
     desc: "Oluf never lies, answers are final!"
   }];
-  var help = "```You can use the following commands";
+  let help = "```You can use the following commands";
 
-  for (var y = 0; y < commands.length; y++) {
+  for (let y = 0; y < commands.length; y++) {
     help = help + "\n\n" + _botsettings.default.prefix + commands[y].name + "\n" + commands[y].desc;
   }
 

@@ -4,6 +4,8 @@ import {guildLog} from "../../modules/db/models/index.js";
 
 export default (message, args=null) => {
 
+    return 0;
+
     if(args) {
 
         if(args[0] === "test") {
