@@ -35,10 +35,10 @@ function command(message, command, args) {
       amisexy: () => (0, _amisexy.default)(message, args),
       sql: () => (0, _sql.default)(message, args),
       log: () => (0, _log.default)(message, args),
-      join: () => voice.join(message, args),
-      leave: () => voice.leave(message, args),
-      play: () => voice.play(message, args),
-      stop: () => voice.stop(message, args),
+      // join: () => voice.join(message, args),
+      // leave: () => voice.leave(message, args),
+      // play: () => voice.play(message, args),
+      // stop: () => voice.stop(message, args),
       default: () => message.channel.send("Dafuq you talkin about!?")
     }; //Return command or unknown command response
 

@@ -27,13 +27,13 @@ export function command(message, command, args) {
 
             log: () => log(message, args),
 
-            join: () => voice.join(message, args),
+            // join: () => voice.join(message, args),
 
-            leave: () => voice.leave(message, args),
+            // leave: () => voice.leave(message, args),
 
-            play: () => voice.play(message, args),
+            // play: () => voice.play(message, args),
 
-            stop: () => voice.stop(message, args),
+            // stop: () => voice.stop(message, args),
     
             default: () => message.channel.send("Dafuq you talkin about!?"),
         };
