@@ -16,3 +16,11 @@ export default async (req, res) => {
     return 0
 
 }
+
+export async function addGuildToLog(req, res) {
+    
+}
+
+export async function removeGuildToLog(req, res) {
+
+}

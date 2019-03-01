@@ -5,46 +5,57 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = void 0;
 
+var _config = _interopRequireDefault(require("../../../data/config.json"));
+
 var _fs = _interopRequireDefault(require("fs"));
 
 var _http = _interopRequireDefault(require("http"));
 
 var _https = _interopRequireDefault(require("https"));
 
+var _cors = _interopRequireDefault(require("cors"));
+
 var _express = _interopRequireDefault(require("express"));
 
 var _bodyParser = _interopRequireDefault(require("body-parser"));
 
-var _cors = _interopRequireDefault(require("cors"));
+var _helpers = require("./helpers");
 
 var _routes = require("./routes");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-const apiServer = (0, _express.default)();
-const port = 8080;
-const sPort = 8443; //Becayse, exports
-
+//Becayse, exports
 var _default = () => {
   return ":)";
-}; //Apply middlewares
+}; //If api is not enabled in config don't do anything...
 
 
 exports.default = _default;
-apiServer.use('*', (0, _cors.default)({
-  origin: true
-}));
-apiServer.use('/api', _bodyParser.default.urlencoded({
-  extended: true
-}));
-apiServer.use('/api', _bodyParser.default.json()); //Routes defined in routes.js
 
-(0, _routes.routes)(apiServer);
-const options = {
-  key: _fs.default.readFileSync('/webdev/STAR-fungy-no/server.key'),
-  cert: _fs.default.readFileSync('/webdev/STAR-fungy-no/STAR-fungy-no.crt')
-}; // apiServer.listen(port, () => console.log(`API listening on port ${port}`));
+if (_config.default.api.enabled) {
+  //Define stuff
+  const apiServer = (0, _express.default)();
+  const port = _config.default.api.port;
+  const sPort = _config.default.api.sPort; //Apply middlewares
 
-_http.default.createServer(apiServer).listen(port);
+  apiServer.use('*', (0, _cors.default)({
+    origin: true
+  }));
+  apiServer.use('/api', _bodyParser.default.urlencoded({
+    extended: true
+  }));
+  apiServer.use('/api', _bodyParser.default.json());
+  apiServer.use('/api', _helpers.verifyInput); //Routes defined in routes.js
 
-_https.default.createServer(options, apiServer).listen(sPort);
+  (0, _routes.routes)(apiServer); //Options for https module
+
+  const options = {
+    key: _fs.default.readFileSync(_config.default.api.key),
+    cert: _fs.default.readFileSync(_config.default.api.cert)
+  }; // apiServer.listen(port, () => console.log(`API listening on port ${port}`));
+
+  _http.default.createServer(apiServer).listen(port);
+
+  _https.default.createServer(options, apiServer).listen(sPort);
+}

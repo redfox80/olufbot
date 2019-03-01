@@ -21,30 +21,25 @@ var _default = async (req, res) => {
   if (typeof req.body.username !== 'string' || typeof req.body.password !== 'string') {
     res.status(400).send('Bad Request');
     return 0;
-  } //Find user in db
-
-
-  let user = await _index.User.findOne({
-    where: {
-      username: req.body.username
-    },
-    attributes: ['id', 'username', 'password']
-  }).then(user => {
-    return user;
-  }); //If no match in DB send 403 status
-
-  if (!user) {
-    res.status(403).send('Invalid credentials');
-    return 0;
   } //Check password
 
 
   const hash = _crypto.default.createHmac('sha512', _config.default.hashSecret);
 
   hash.update(req.body.password);
-  const hashed = hash.digest("hex");
+  const hashed = hash.digest("hex"); //Find user in db
 
-  if (user.password !== hashed) {
+  let user = await _index.User.findOne({
+    where: {
+      username: req.body.username,
+      password: hashed
+    },
+    attributes: ['id', 'username']
+  }).then(user => {
+    return user;
+  }); //If no match in DB send 403 status
+
+  if (!user) {
     res.status(403).send('Invalid credentials');
     return 0;
   } //Valid chars for a random token

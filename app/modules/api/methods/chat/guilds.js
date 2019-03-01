@@ -3,6 +3,8 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
+exports.addGuildToLog = addGuildToLog;
+exports.removeGuildToLog = removeGuildToLog;
 exports.default = void 0;
 
 var _auth = require("../auth");
@@ -23,3 +25,7 @@ var _default = async (req, res) => {
 };
 
 exports.default = _default;
+
+async function addGuildToLog(req, res) {}
+
+async function removeGuildToLog(req, res) {}

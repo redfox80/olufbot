@@ -12,15 +12,20 @@ export default async (req, res) => {
         return 0;
     }
 
+    //Check password
+    const hash = crypto.createHmac('sha512', config.hashSecret);
+    hash.update(req.body.password);
+    const hashed = hash.digest("hex");
+
     //Find user in db
     let user = await User.findOne({
             where: {
-                username: req.body.username
+                username: req.body.username,
+                password: hashed
             },
             attributes: [
                 'id',
-                'username',
-                'password'
+                'username'
             ]
         })
         .then(user => {
@@ -29,16 +34,6 @@ export default async (req, res) => {
 
     //If no match in DB send 403 status
     if(!user) {
-        res.status(403).send('Invalid credentials');
-        return 0;
-    }
-
-    //Check password
-    const hash = crypto.createHmac('sha512', config.hashSecret);
-    hash.update(req.body.password);
-    const hashed = hash.digest("hex");
-
-    if(user.password !== hashed) {
         res.status(403).send('Invalid credentials');
         return 0;
     }
