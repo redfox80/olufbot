@@ -19,9 +19,9 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 var _default = async () => {
   //Defined here for later use
-  let date = new Date(); //Get timestamp for the first of this month
+  let date = new Date(); //Get timestamp for the first of last month
 
-  let thisMonth = `${date.getFullYear()}-${date.getMonth() + 1 > 9 ? date.getMonth() + 1 : '0' + (date.getMonth() + 1)}-01 00:00:00`; //Get top 3 chatters from this month
+  let thisMonth = `${date.getFullYear()}-${date.getMonth() > 9 ? date.getMonth() : '0' + date.getMonth()}-01 00:00:00`; //Get top 3 chatters from this month
 
   let results = await _index.sequelize.query(`SELECT author_displayname AS 'user', COUNT(id) AS 'messages' FROM olufbot.ChatLogs WHERE sent_at > '${thisMonth}' GROUP BY author_id ORDER BY COUNT(id) DESC LIMIT 3`, {
     type: _index.sequelize.QueryTypes.SELECT
@@ -31,7 +31,7 @@ var _default = async () => {
 
   let string = `
         <p>
-            Top chatters this month
+            Top chatters last month
             <table>
                 <thead>
                     <th>#</th>
@@ -70,12 +70,9 @@ var _default = async () => {
   htmlFile = dom.serialize(); //Create image from html string
 
   let stats = await (0, _image.default)(htmlFile); //Write to disk
-
-  _fs.default.writeFile(`${__dirname}/../../../../data/reports/monthly_${date.getMonth() + 1}_${date.getFullYear()}_${Math.floor(Math.random() * 10000)}.png`, stats, err => {
-    if (err) console.error(err);
-  });
-
-  return 0;
+  // fs.writeFile(`${__dirname}/../../../../data/reports/monthly_${date.getMonth()+1}_${date.getFullYear()}_${Math.floor((Math.random() * 10000))}.png`, stats, (err) => {
+  //     if (err) console.error(err);
+  // });
 
   let channel = _main.bot.channels.get("540978236834709504"); //Send image to discord channel
 

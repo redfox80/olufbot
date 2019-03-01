@@ -26,7 +26,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 require('babel-polyfill');
 
-(0, _handler.default)();
+// apiHandler();
 const bot = new _discord.default.Client(_botsettings.default.clientSettings);
 exports.bot = bot;
 bot.on("ready", async () => {

@@ -9,8 +9,8 @@ export default async () => {
     //Defined here for later use
     let date = new Date();
 
-    //Get timestamp for the first of this month
-    let thisMonth = `${date.getFullYear()}-${((date.getMonth()+1) > 9) ? (date.getMonth()+1):'0'+(date.getMonth()+1)}-01 00:00:00`;
+    //Get timestamp for the first of last month
+    let thisMonth = `${date.getFullYear()}-${((date.getMonth()) > 9) ? (date.getMonth()):'0'+(date.getMonth())}-01 00:00:00`;
 
     //Get top 3 chatters from this month
     let results = await sequelize.query(`SELECT author_displayname AS 'user', COUNT(id) AS 'messages' FROM olufbot.ChatLogs WHERE sent_at > '${thisMonth}' GROUP BY author_id ORDER BY COUNT(id) DESC LIMIT 3`, { type: sequelize.QueryTypes.SELECT})
@@ -21,7 +21,7 @@ export default async () => {
     //Prepare data from database for the html template
     let string = `
         <p>
-            Top chatters this month
+            Top chatters last month
             <table>
                 <thead>
                     <th>#</th>
@@ -66,11 +66,9 @@ export default async () => {
     let stats = await image(htmlFile);
 
     //Write to disk
-    fs.writeFile(`${__dirname}/../../../../data/reports/monthly_${date.getMonth()+1}_${date.getFullYear()}_${Math.floor((Math.random() * 10000))}.png`, stats, (err) => {
-        if (err) console.error(err);
-    })
-    
-    return 0;
+    // fs.writeFile(`${__dirname}/../../../../data/reports/monthly_${date.getMonth()+1}_${date.getFullYear()}_${Math.floor((Math.random() * 10000))}.png`, stats, (err) => {
+    //     if (err) console.error(err);
+    // });
     
     let channel = bot.channels.get("540978236834709504");
     //Send image to discord channel

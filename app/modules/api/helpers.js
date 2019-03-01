@@ -9,11 +9,11 @@ function verifyInput(req, res, next) {
   //If there is no body, do nothing...
   if (req === undefined) next();
   if (req.body === undefined) next();
+  let gucci = true;
   let body = req.body; //IF body is empty continue
 
   if (body.length === 0) {
-    next();
-    return true;
+    gucci = true;
   } //Something is not right if this case is true...
 
 
