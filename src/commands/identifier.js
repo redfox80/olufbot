@@ -8,7 +8,7 @@ import yeet from './commands/yeet.js';
 import * as voice from './commands/voice.js';
 
 export function command(message, command, args) {
-    
+
     //Get appropiate command
     let res = commands();
     //Run command
@@ -28,15 +28,13 @@ export function command(message, command, args) {
 
             log: () => log(message, args),
 
-            join: () => voice.join(message, args),
+            // join: () => voice.join(message, args),
 
-            leave: () => voice.leave(message, args),
+            // leave: () => voice.leave(message, args),
 
-            play: () => voice.play(message, args),
+            // play: () => voice.play(message, args),
 
-            stop: () => voice.stop(message, args),
-
-            yeet: () => yeet(message, args),
+            // stop: () => voice.stop(message, args),
     
             default: () => message.channel.send("Dafuq you talkin about!?"),
         };

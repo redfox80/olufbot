@@ -10,7 +10,7 @@ import report from './modules/report_generator/image';
 import reportScheduler from './modules/report_generator/scheduler';
 import apiHandler from './modules/api/handler';
 
-apiHandler();
+// apiHandler();
 
 export const bot = new Discord.Client(botsettings.clientSettings);
 
