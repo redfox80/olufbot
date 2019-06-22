@@ -18,7 +18,8 @@ var _index = require("../../db/models/index");
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var _default = async () => {
-  //Defined here for later use
+  let statsFrom = ['355385315575332866']; //Defined here for later use
+
   let date = new Date(); //Get timestamp for the first of this month
 
   let thisMonth = `${date.getFullYear()}-${date.getMonth() + 1 > 9 ? date.getMonth() + 1 : '0' + (date.getMonth() + 1)}-01 00:00:00`; //Get top 3 chatters from this month

@@ -4,10 +4,11 @@ import help from './commands/help.js';
 import amisexy from './commands/amisexy.js';
 import sql from './commands/sql.js';
 import log from './commands/log.js';
+import yeet from './commands/yeet.js';
 import * as voice from './commands/voice.js';
 
 export function command(message, command, args) {
-
+    
     //Get appropiate command
     let res = commands();
     //Run command
@@ -34,6 +35,8 @@ export function command(message, command, args) {
             play: () => voice.play(message, args),
 
             stop: () => voice.stop(message, args),
+
+            yeet: () => yeet(message, args),
     
             default: () => message.channel.send("Dafuq you talkin about!?"),
         };

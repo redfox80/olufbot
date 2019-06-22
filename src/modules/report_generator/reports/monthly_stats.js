@@ -6,6 +6,10 @@ import {sequelize} from "../../db/models/index";
 
 export default async () => {
 
+    let statsFrom = [
+        '355385315575332866'
+    ];
+
     //Defined here for later use
     let date = new Date();
 
