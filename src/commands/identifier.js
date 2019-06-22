@@ -35,6 +35,8 @@ export function command(message, command, args) {
             // play: () => voice.play(message, args),
 
             // stop: () => voice.stop(message, args),
+
+            yeet: () => yeet(message, args),
     
             default: () => message.channel.send("Dafuq you talkin about!?"),
         };
